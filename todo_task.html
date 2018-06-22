@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Todo Task</title>
+    <script>
+   function reducer(state, action){
+    
+    if(action.type === 'ADD'){
+        state.todoList.push(state);
+    } 
+    if(action.type === 'DELETE') {
+        state.todoList.splice(store.getState().id,1)
+    }
+    return state;
+}
+
+function createStore(_reducer){
+    var state = {
+        todo :{
+            id:0,
+            name:''
+        },
+        todoList : []
+    };
+    
+    var _listener = [];
+
+    function getState() {
+        return state;
+    }
+    function getTodoList(){
+        return state.todoList;
+    }
+    function dispatch(action){
+        state = _reducer(state, action);
+        
+        _listener.forEach(function(listener){
+            listener();
+        });
+        todoList.forEach(function(todoItem){
+            console.log('from list '+todoItem.id+' '+todoItem.name);
+        });
+    }
+    function subscribe(listener){
+        _listener.push(listener);
+    }
+
+    return{
+        dispatch,
+        getState,
+        subscribe,
+        getTodoList
+    }
+};
+
+var store = createStore(reducer);
+
+store.subscribe(showTodo);
+
+function addTodo(){
+store.dispatch({
+    type: 'ADD',
+    payload: {
+        id:store.getState().id+1,
+        name:document.getElementById('task').value
+    }
+});
+}
+function deleteTodo(id) {
+    store.dispatch({
+    type: "DELETE"
+ })   
+}
+function showTodo(){
+    var ul = document.querySelector('ul');
+  
+    store.getTodoList().forEach(function(todo){
+        var li = document.createElement('li');
+        console.log('id :'+store.getState().id);
+        console.log('name :'+store.getState().name);
+        var button = createButton();
+        button.setAttribute("id", store.getState().id);
+        buttonElement.setAttribute("onClick",deleteTodo(button.getAttribute(id)));
+        li.textContent = store.getState().id+' '+store.getState().name;
+        li.innerHTML = li.textContent;
+        li.appendChild(button);
+        ul.appendChild(li);
+    });
+
+}
+function createButton(){
+    var buttonElement = document.createElement("button");
+    buttonElement.innerHTML="Delete";
+
+    return buttonElement;
+}
+
+    </script>
+</head>
+<body>
+    <input type="text" id="task" placeholder="Enter your task"> 
+    <button onclick="addTodo()">Add</button>
+        <div>
+            <ul></ul>
+        </div>
+    </body>
+</html>
