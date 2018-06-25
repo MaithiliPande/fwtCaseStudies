@@ -1,29 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import {Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 import './index.css';
-import ConnetedApp from './app-connector';
+import App from './App';
 import reducer from './app-reducer';
+import ConnetedApp from './app-connector';
 import registerServiceWorker from './registerServiceWorker';
 
 const initialState = {
-    count: 0
-};
+    todo : {
+        name : '',
+        date : new Date()
+    },
+    todoList : []
+}
 
-const store = createStore(reducer, initialState);
+const store = createStore(reducer,initialState);
 
-class MainApp extends React.Component {
+class MainApp extends React.Component{
     render() {
-        return (
-            <Provider store={store}>
-                <ConnetedApp />
+        return(
+            <Provider store = {store}>
+                <ConnetedApp/>
             </Provider>
         )
     }
 }
 
 ReactDOM.render(<MainApp />, document.getElementById('root'));
-
 registerServiceWorker();
