@@ -1,0 +1,17 @@
+Given : ATM Machine
+When I swipe the card at ATM Machine   |  Expected Result : The application login page should be opened successfully.
+When I enter pin number and hit 'Login' | Expected Result : The user should be logged in successfully and the home page should be displayed.
+
+
+Verify the slot for ATM card insertion is as per the specification.
+Verify if the card is inserted from the proper side.
+Verify if the card is valid. Example: expired card.
+Verify that user is asked to enter the pin before displaying any account details.
+Verify if pin is entered.
+Verify if pin entered is numeric and of four digit only.
+Verify if the entered pin belongs to the appropriate account.
+Verify that there are limited number of attempts (as specified in the requirements) upto which user is allowed to enter pin number.
+Verify if limited number of attempts for entering pin number gets exceeded then the user should not be allowed to continue further
+and card should get blocked.
+Verify that the pin is entered before specified time out.
+Verify the cancel transaction operation. When user hits 'Cancel', previous page should be displayed.
